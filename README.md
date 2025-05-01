@@ -1,13 +1,50 @@
-# add project name here  <img src='https://21centuryweather.org.au/wp-content/uploads/Hackathon-Image-WCRP-Positive-1536x736.jpg' align="right" height="139" />
+# Precipitation/soil moisture feedback: positive or negative?  <img src='https://21centuryweather.org.au/wp-content/uploads/Hackathon-Image-WCRP-Positive-1536x736.jpg' align="right" height="139" />
 
-Project description, please include the main idea and questions that motivate the project.
+**Project leads:** Mathew Lipson (@matlipson), 21st Century Weather, UNSW Sydney /
+
+**Project members:** TBC
+
+**Collaborators:**
+Other hackathon land project: https://github.com/digital-earths-global-hackathon/hk25-teams/tree/main/hk25-Land
+
+## Background
+
+There is ongoing debate on whether soil moisture is positively or negatively correlated with precipitation. This has huge implications for future climate, storms, drought and land cover change: i.e. will lower soil moisture lead to lower local precipitation, leading to lower soil moisture and so on? Our current global climate models (e.g. for CMIP6) indicate a strong positive feedback, while km-scale models indicate a weak or negative feedback.
+
+A recent study (Lee and Hohenegger, 2024) compared global year-long 5km simulations with 60-year 160 km resolution simulations more typical of climate simulations, both using the ICON model. They examined the northern hemisphere (boreal) summer, and found weaker and more negative soil moisture/ precipitation feedback in high resolution simulations, with some regional differences. While interesting, the results have little bearing on Australia, as results are analysed during our northern dry season with little to no rain.
+
+This Hackathon provides the necessary data to test whether resolution is important in soil moisture/ precipitation feedbacks, and how important that is for Australia
+
+Lee and Hohenegger, 2024: https://doi.org/10.1073/pnas.2314265121
+Weaker land–atmosphere coupling in global storm-resolving simulation
+
+![Lee2024](https://github.com/user-attachments/assets/97fe3414-d4ed-4a45-825d-0f2cba6cbaf8)
+
+**Primary research question:**
+Can we reproduce the results of Lee and Hohenegger 2024 for an Austral summer?
+If so, what are the implications for Australia?
+
+**Secondary research questions:**
+How do the correlation differences compare across different models?
+Can we resolve the important processes and precedent conditions that lead to positive/negative feedback?
+What are the timescales of important feedbacks? (hours, days, weeks?)
+What is the impact of soil moisture differences on storm/ hail/ precip conditions
+
+**Methods:**
+All read Lee and Hohenegger, 2024 methods and discuss with group
+Split up to read other relevant literature and summarise to group
+Read over Lee and Hohenegger github python code for paper, discuss problems
+Split into groups of two to write code to 1) reproduce Lee and Hohenegger 2) analyse ACDC observations for Australia 3) if not part of available outputs, calculate CAPE, CIN (hopefully other groups need these variables also)
+Come together to write draft paper
+
+**Further reading:**
+ - On the Physics of High CAPE (Emanuel 2023): https://doi.org/10.1175/JAS-D-23-0060.1
+ - Influence of land-atmosphere feedbacks on temperature and precipitation extremes in the GLACE-CMIP5 ensemble (Lorenz et al., 2016) 10.1002/2015JD024053
+ - Intraseasonal versus interannual measures of land-atmosphere coupling strength in a global climate model: GLACE-1 versus GLACE-CMIP5 experiments in ACCESS1.3b (Lorenz et al., 2015): 10.1175/JHM-D-14-0206.1
 
 
-**Project leads:** name, affiliation/github username
 
-**Project members:** name, affiliation/github username
 
-**Collaborators:** list here other collaborators to the project.
 
 **Data:**
 * Name, link
