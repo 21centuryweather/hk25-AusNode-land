@@ -1,13 +1,22 @@
+'''
+#### these modules are required to run the script
+module use /g/data/hh5/public/modules
+module load conda/analysis3
+source /scratch/nf33/public/hackathon_env/bin/activate
+'''
+
 import xarray as xr
 import matplotlib.pyplot as plt
 import easygems.healpix as egh
 import cartopy.crs as ccrs
 
 # define paths
-datapath = '/scratch/nf33/Healpix_data/'
-model = 'UM'
-zoom = 'z2'
-fpath = f'{datapath}{model}/data.healpix.PT1H.{zoom}.zarr'
+datapath = '/g/data/qx55/germany_node/d3hp003.zarr'
+file = 'PT3H'
+zoom = 'z5'
+
+# define the fname
+fpath = f'{datapath}/{file}_mean_{zoom}_atm.zarr'
 
 # open the zarr file
 ds = xr.open_zarr(fpath)
@@ -17,44 +26,41 @@ for key, longname in ds.data_vars.items():
     print(f'{key}: {longname.long_name}')
 
 '''
-clivi:  atmosphere_mass_content_of_cloud_ice
-clt:    cloud_area_fraction
-clwvi:  atmosphere_mass_content_of_cloud_condensed_water
-hflsd:  surface_downward_latent_heat_flux
-hfssd:  surface_downward_sensible_heat_flux
-huss:   specific_humidity
-pr:     precipitation_flux
-prs:    solid_precipitation_flux
-prw:    atmosphere_mass_content_of_water_vapor
-ps:     surface_air_pressure
-psl:    air_pressure_at_mean_sea_level
-rlds:   surface_downwelling_longwave_flux_in_air
-rldscs: surface_downwelling_longwave_flux_in_air_clear_sky
-rlut:   toa_outgoing_longwave_flux
-rlutcs: toa_outgoing_longwave_flux_clear_sky
-rsds:   surface_downwelling_shortwave_flux_in_air
-rsdscs: surface_downwelling_shortwave_flux_in_air_clear_sky
-rsdt:   toa_incoming_shortwave_flux
-rsut:   toa_outgoing_shortwave_flux
-rsutcs: toa_outgoing_shortwave_flux_clear_sky
-tas:    air_temperature
-ts:     surface_temperature
-uas:    eastward_wind
-vas:    northward_wind
+#### some variables of interest ####
+
+hflsd: latent heat flux
+hfssd: sensible heat flux
+huss: specific humidity in 2m
+mrso: Water content of soil layers
+orog: surface altitude
+pr: precipitation flux
+rlds: surface downwelling longwave radiation
+rldscs: surface downwelling clear-sky longwave radiation
+rlus: surface upwelling longwave radiation
+rsds: surface downwelling shortwave radiation
+rsdscs: surface downwelling clear-sky shortwave radiation
+rsus: surface upwelling shortwave radiation
+sftlf: cell area fraction occupied by land including lakes
+tas: temperature in 2m
+tauu: u-momentum flux at the surface
+tauv: v-momentum flux at the surface
+ts: surface temperature
+uas: zonal wind in 10m
+vas: meridional wind in 10m
 '''
 
 # choose a variable to plot
-da = ds['tas']
+da = ds['mrso']
 
 # test plot some data
 plt.close('all')
 projection=ccrs.PlateCarree(central_longitude=0.0)
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': projection}, layout='constrained')
 
-data = da.isel(time=20)
+data = da.isel(time=20, soil_level=1)
 ax.set_global()
 im = egh.healpix_show(data.values,ax=ax)
-ax.set_title(f'UM N2560 RAL3 healpix zoom = {zoom}')
+ax.set_title(f'ICON zoom = {zoom}')
 ax.coastlines()
 ax.gridlines(draw_labels=True)
 fig.colorbar(im,orientation='vertical')
