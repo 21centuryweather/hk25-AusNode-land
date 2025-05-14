@@ -12,11 +12,11 @@ import cartopy.crs as ccrs
 
 # define paths
 datapath = '/g/data/qx55/germany_node/d3hp003.zarr'
-file = 'PT3H'
+file = 'PT3H_mean'
 zoom = 'z5'
 
 # define the fname
-fpath = f'{datapath}/{file}_mean_{zoom}_atm.zarr'
+fpath = f'{datapath}/{file}_{zoom}_atm.zarr'
 
 # open the zarr file
 ds = xr.open_zarr(fpath)
@@ -55,9 +55,9 @@ da = ds['mrso']
 # test plot some data
 plt.close('all')
 projection=ccrs.PlateCarree(central_longitude=0.0)
-fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': projection}, layout='constrained')
+fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': projection})
 
-data = da.isel(time=20, soil_level=1)
+data = da.isel(soil_level=0).mean('time')
 ax.set_global()
 im = egh.healpix_show(data.values,ax=ax)
 ax.set_title(f'ICON zoom = {zoom}')
